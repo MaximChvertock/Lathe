@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/lathe" resource-ref="true"/>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>by.chvertock.lathe.model.entities.user.Role</value>
+                <value>by.chvertock.lathe.model.entities.user.User</value>
+
+                <!-- Common -->
+                <value>by.chvertock.lathe.model.entities.common.Country</value>
+
+                <!-- Tire -->
+                <value>by.chvertock.lathe.model.entities.tire.TireBrand</value>
+                <value>by.chvertock.lathe.model.entities.tire.TireType</value>
+                <value>by.chvertock.lathe.model.entities.tire.TireImage</value>
+                <value>by.chvertock.lathe.model.entities.tire.TireWidth</value>
+                <value>by.chvertock.lathe.model.entities.tire.TireProfile</value>
+                <value>by.chvertock.lathe.model.entities.tire.TireDiameter</value>
+                <value>by.chvertock.lathe.model.entities.tire.Tire</value>
+
+                <!-- Customer cart -->
+                <value>by.chvertock.lathe.model.entities.cart.CustomerCart</value>
+                <value>by.chvertock.lathe.model.entities.cart.CustomerCartTire</value>
+
+                <!-- Customer order -->
+                <value>by.chvertock.lathe.model.entities.order.CustomerOrder</value>
+                <value>by.chvertock.lathe.model.entities.order.CustomerOrderTire</value>
+                <value>by.chvertock.lathe.model.entities.order.CustomerOrderStatus</value>
+
+                <!-- Customer info -->
+                <value>by.chvertock.lathe.model.entities.order.CustomerInfo</value>
+
+                <!-- Lathe -->
+                <value>by.chvertock.lathe.model.entities.lathe.Lathe</value>
+                <value>by.chvertock.lathe.model.entities.lathe.LatheManufacturer</value>
+                <value>by.chvertock.lathe.model.entities.lathe.LatheComputerNumericalControl</value>
+                <value>by.chvertock.lathe.model.entities.lathe.LatheType</value>
+                <value>by.chvertock.lathe.model.entities.lathe.LatheToolHolderType</value>
+                <value>by.chvertock.lathe.model.entities.lathe.LatheManufacturerCountry</value>
+                <value>by.chvertock.lathe.model.entities.common.Image</value>
+
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hbm2ddl.auto">update</prop>
+                <prop key="current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+                <prop key="show_sql">false</prop>
+
+                <prop key="hibernate.connection.CharSet">utf8</prop>
+                <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>

@@ -1,0 +1,20 @@
+/*
+ * Author: Maksim Chvertock
+ * Copyright (c) 2016.
+ */
+
+.custom-collapse {
+    display: block;
+}
+
+.custom-collapse + input {
+    display: none;
+}
+
+.custom-collapse + input + * {
+    display: none;
+}
+
+.custom-collapse + input:checked + * {
+    display: block;
+}
