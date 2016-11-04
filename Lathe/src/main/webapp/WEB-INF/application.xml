@@ -144,8 +144,8 @@
     </bean>
 
     <bean id="mailSender" class="by.chvertock.lathe.service.MailSender">
-        <property name="login" value="ftnoreplytest@gmail.com"/>
-        <property name="password" value="rGKHSZr2BTNTkNnsKmoZ"/>
+        <property name="login" value=""/>
+        <property name="password" value=""/>
         <property name="properties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
