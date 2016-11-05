@@ -19,7 +19,7 @@
 
         <form-login
                 login-page="/login"
-                default-target-url="/admin/tires"
+                default-target-url="/admin/lathes"
                 authentication-failure-url="/login?error=true"
                 username-parameter="username"
                 password-parameter="password"/>
